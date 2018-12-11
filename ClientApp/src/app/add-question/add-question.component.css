@@ -1,0 +1,46 @@
+.inp{
+    background: transparent !important;
+
+    border-radius: 25px;
+    height: 50px;
+    border: 1px solid white;
+   
+}
+
+.but{
+    background: #4189C7 !important;
+    border: 0px !important;
+
+}
+
+
+.form-control::-moz-placeholder {
+    color: white;
+    opacity: 1;
+  }
+  .form-control:-ms-input-placeholder {
+    color: white;
+  }
+  .form-control::-webkit-input-placeholder {
+    color:white;
+  }
+
+
+   input[type="text"] {
+    color: white;
+  }
+
+  textarea{
+    color: white;
+}
+
+
+.tex{
+
+  background: transparent !important;
+  min-height: 100px;
+ 
+  height: 50px;
+  border: 1px solid white;
+
+}

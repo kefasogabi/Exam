@@ -1,0 +1,23 @@
+.home{
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+   
+   margin-top: 0px !important;
+   background-image:url(../Image/online-exam-test.jpg) no-repeat ;
+   background-size:cover;
+   background-position: center !important;
+   height: 100% !important;
+   width: 100% !important;
+   background-attachment: fixed;
+  
+   
+  
+   
+  
+   
+}
+
+

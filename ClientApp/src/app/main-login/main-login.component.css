@@ -1,0 +1,22 @@
+
+.panel-heading{
+    background: transparent !important;
+}
+
+.log{
+   
+    background: #4189C7 !important;
+  
+    border-radius:5px; 
+}
+
+ a{
+    color: #ffffff !important;
+}
+
+a:hover{
+    color: #4189C7 !important;
+}
+a:active{
+    color: #4189C7 !important;
+}

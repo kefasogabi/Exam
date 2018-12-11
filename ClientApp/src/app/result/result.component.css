@@ -1,0 +1,9 @@
+.green-text{
+    color: green;
+    float: right !important;
+}
+
+.red-text{
+    float: right !important;
+    color: red;
+}

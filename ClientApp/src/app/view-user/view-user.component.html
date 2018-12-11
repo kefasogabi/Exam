@@ -1,0 +1,68 @@
+
+<div style="margin-top: 40px;" class="row"  >
+  <div class="col-md-4 col-md-offset-4">
+     
+     <div class="panel panel-primary">
+         <div class="panel-heading">
+          <h4 style="text-align:center; font-weight:bolder;">Details</h4>
+         </div>
+         <div style="background: #4189C7;" class="panel-body"> 
+               <table class="table table-hover">
+                   <thead>
+                       <tr>
+                           <th>LoginId</th>
+                           <th>{{person.loginid}}</th>
+                       </tr>
+                   </thead>
+                   <thead>
+                      <tr>
+                          <th>Email</th>
+                          <th>{{person.email}}</th>
+                      </tr>
+                  </thead>
+                  <thead>
+                      <tr>
+                          <th>Username</th>
+                          <th>{{person.username}}</th>
+                      </tr>
+                  </thead>
+                  <thead>
+                      <tr>
+                          <th>Phone</th>
+                          <th>{{person.phone}}</th>
+                      </tr>
+                  </thead>
+                  <thead>
+                      <tr>
+                          <th>City</th>
+                          <th>{{person.city}}</th>
+                      </tr>
+                  </thead>
+                  <thead>
+                      <tr>
+                          <th>Address</th>
+                          <th>{{person.address}}</th>
+                      </tr>
+                  </thead>
+                  <thead *ngIf="person.score">
+                      <tr>
+                          <th>Score</th>
+                          <th>{{person.score}}</th>
+                      </tr>
+                  </thead>
+                  <thead *ngIf="person.timeSpent">
+                      <tr>
+                          <th>TimeSpent</th>
+                          <th>{{person.timeSpent}} seconds</th>
+                      </tr>
+                  </thead>
+                   
+               </table>   
+          
+         </div>
+       </div>
+
+  
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* input.ng-invalid.ng-dirty{
+    border: 1px solid red !important;
+    box-shadow: 0 1px 0 0 red !important;
+} */
+
+
+.Image{
+    
+    
+   background-image:url(../src/app/Image/onlineExam.jpeg) fixed no-repeat !important;
+   background-size:cover !important;
+   background-position: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    background-attachment: fixed;
+   
+}

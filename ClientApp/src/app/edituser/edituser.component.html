@@ -1,0 +1,45 @@
+<div class="container">
+    <div  class=" col-md-4 col-md-offset-4 " style=" margin-bottom: 20px !important; ">
+  
+        <form #reg="ngForm" (ngSubmit)="onUpdate(reg)" >
+  
+            <input  type="hidden" name="id" #id="ngModel" [(ngModel)]="person.id" class="form-control inp "  required  placeholder="Enter Option 1"  >
+        
+          <div class="form-group">
+            <!-- <label for="">PassWord</label> -->
+            <input  type="text" name="loginid" #loginid="ngModel" [(ngModel)]="person.loginid" class="form-control inp "  required  placeholder="LoginId"  >
+          </div>
+          <div class="form-group">
+            <!-- <label for="">PassWord</label> -->
+            <input  type="text" name="email" #email="ngModel"  [(ngModel)]="person.email" class="form-control inp "  required  placeholder="Email"  >
+          </div>
+          <div class="form-group">
+            <!-- <label for="">PassWord</label> -->
+            <input  type="text" name="username" #username="ngModel" [(ngModel)]="person.username" class="form-control inp "  required  placeholder="UserName"  >
+          </div>
+          <div class="form-group">
+            <!-- <label for="">PassWord</label> -->
+            <input  type="text" name="phone" #phone="ngModel"  [(ngModel)]="person.phone" class="form-control inp "  required  placeholder="Phone"  >
+          </div>
+          <div class="form-group">
+            <!-- <label for="">PassWord</label> -->
+            <input  type="text" name="city" #city="ngModel" [(ngModel)]="person.city" class="form-control inp "  required  placeholder="City"  >
+          </div>
+          <div class="form-group">
+              <!-- <label for="">PassWord</label> -->
+              <input  type="text" name="address" #address="ngModel" [(ngModel)]="person.address" class="form-control inp "  required  placeholder="Address"  >
+            </div>
+            <div class="form-group">
+                <!-- <label for="">PassWord</label> -->
+                <input   type="text" name="score" #score="ngModel" [(ngModel)]="person.score" class="form-control inp "  required  placeholder="Score"  >
+              </div>
+              <div class="form-group">
+                  <!-- <label for="">PassWord</label> -->
+                  <input  type="text" name="timeSpent" #timeSpent="ngModel" [(ngModel)]="person.timeSpent" class="form-control inp "  required  placeholder="Time Spent"  >
+                </div>
+        <br>
+          <button type="submit" class="btn btn-primary form-control but inp " [disabled]="!reg.valid" >SUBMIT</button>
+        </form>
+  
+  </div>
+  </div>

@@ -1,0 +1,16 @@
+.img{
+    
+    
+    background-image:url(../Image/exam.jpg) fixed no-repeat !important;
+    background-size:cover !important;
+    background-position: center !important;
+     height:600px  !important;
+     width: 1349px !important;
+     background-attachment: fixed;
+     margin-top: 0px;
+     padding-top: 0px;
+     z-index: -1;
+ }
+
+
+ 

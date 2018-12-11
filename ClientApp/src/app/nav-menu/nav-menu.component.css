@@ -1,0 +1,86 @@
+li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus {
+    background-color: #4189C7 !important;
+    color: white !important;
+}
+
+.navbar-nav > li > a:hover{
+    background-color: #4189C7 !important;
+    color: white !important;
+}
+
+.navbar-nav > li > a{
+    font-weight: bolder;
+}
+
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    z-index: 1;
+}
+.left{
+    float: left !important;
+}
+.right{
+    float: right !important;
+}
+
+@media (max-width: 768px) { 
+    .left{
+        float: none !important;
+    }
+    .right{
+        float: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    /* On small screens, convert the nav menu to a vertical sidebar */
+    .main-nav {
+        height: 100%;
+        
+    }
+    .navbar {
+        border-radius: 0px;
+        border-width: 0px;
+        background: transparent;
+        z-index: 1;
+    }
+    
+   
+    
+    .navbar-header {
+        float: none;
+    }
+    .navbar-collapse {
+        border-top: 0px ;
+        padding: 0px;
+    }
+    .navbar ul {
+        float: right;
+    }
+    .navbar li {
+        
+        font-size: 15px;
+        margin: 6px;
+        float: left;
+    }
+    .navbar li a {
+        padding: 10px 16px;
+        border-radius: 4px;
+        color: white;
+    }
+    .navbar a {
+        /* If a menu item's text is too long, truncate it */
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
