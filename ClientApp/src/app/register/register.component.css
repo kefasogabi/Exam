@@ -1,70 +1,7 @@
 
- 
 
-.inp{
-    background: transparent !important;
 
-    border-radius: 25px !important;
-    height: 50px !important;
-    border: 1px solid white !important;
-   
-}
 
-.but{
-    background: #4189C7 !important;
-    border: 0px !important;
-
-}
-
-.form-control::-moz-placeholder {
-    color: white;
-    opacity: 1;
-  }
-  .form-control:-ms-input-placeholder {
-    color: white;
-  }
-  .form-control::-webkit-input-placeholder {
-    color:white;
-  }
-
-  input[type="text"] {
-    color: white;
-  }
-
-  input[type="password"] {
-    color: white;
-  }
-  input[type="email"] {
-    color: white;
-  }
-  input[type="tel"] {
-    color: white;
-  }
-
-  textarea{
-      color: white;
-  }
-  
-
-  .tex{
-
-    background: transparent !important;
-    min-height: 100px;
-   
-    height: 50px;
-    border: 1px solid white;
-
-  }
-
-  .has-error .checkbox,
- .has-error .checkbox-inline,
-  .has-error .control-label,
-   .has-error .help-block,
-    .has-error .radio,
-     .has-error .radio-inline,
-      .has-error.checkbox label,
-       .has-error.checkbox-inline label,
-        .has-error.radio label, 
-        .has-error.radio-inline label {
+ .validation-error {
     color: red;
 }

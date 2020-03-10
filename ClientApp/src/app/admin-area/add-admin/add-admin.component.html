@@ -1,0 +1,95 @@
+
+      
+      <div class="register-box">
+        <div class="register-logo">
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg">Register a new Admin</p>
+      
+            <form name="form" (ngSubmit)="register(f)" #f="ngForm" novalidate>
+
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" required #firstName="ngModel" placeholder="FirstName">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-key"></span>
+                    </div>
+                  </div>
+                </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" required #lastName="ngModel" placeholder="LastName">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div *ngIf="username.touched && username.invalid" class="validation-error">Username is required</div> -->
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="email" [(ngModel)]="model.email" required #email="ngModel" placeholder="Email">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-phone"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <select class="form-control" [(ngModel)]="model.sexId" name="sexId" required #sexId="ngModel" >
+                  <option  >Select Sex</option>
+                  <option *ngFor="let s of sex"  value="{{s.id}}">{{s.name}}</option>
+              </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-genderless"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="date" class="form-control" name="dateOfBirth" [(ngModel)]="model.dateOfBirth" required #dateOfBirth="ngModel" placeholder="Date of Birth">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-calendar"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="address" [(ngModel)]="model.address" required #address="ngModel" placeholder="Address">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-address-card"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                  <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" required />
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Retype password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+            
+          </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
+      </div>
+      <!-- /.register-box -->
+ 

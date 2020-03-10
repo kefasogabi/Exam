@@ -1,0 +1,9 @@
+.my-box{
+    background-color: rgb(167, 240, 245) !important;
+    color: darkcyan !important;
+    font-size: larger !important;
+}
+
+.my-box-icon{
+   font-size: 70px !important;
+}

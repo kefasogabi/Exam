@@ -1,38 +1,48 @@
-import { QuizService } from './../shared/quiz.service';
+import { AuthService } from './../auth/auth.service';
+import { AccountService } from './../Services/account.service';
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
-import { Input } from '../../../node_modules/@angular/compiler/src/core';
-import { User } from '../shared/user.model';
-import { NgForm } from '../../../node_modules/@angular/forms';
-import { UserService } from '../shared/user.service';
-import { AlertService } from '../shared/alert.service';
+import { UserService } from '../Services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent  {
+export class  RegisterComponent implements OnInit  {
 
+  
+  sex: any[];
   model: any = {};
     loading = false;
 
     constructor(
         private router: Router,
         private userService: UserService,
-        private alertService: AlertService) { }
+        private spinner: NgxSpinnerService,
+        private toastr: ToastrService, 
+        private auth: AuthService) {}
 
-    register() {
-        this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(
+        ngOnInit() {
+          this.userService.getSex().subscribe((data:any) =>{
+            this.sex = data;
+          })
+        }
+
+    register(form: NgForm) {
+        this.spinner.show();
+        this.userService.create(form.value).subscribe(
                 (data: any) => {
-                    this.alertService.success('Registration successful', true);
+                    this.toastr.success('Registration Successfull', 'Success');
                     this.router.navigate(['/login']);
+                    this.spinner.hide();
                 },
                 error => {
-                    this.alertService.error(error._body);
-                    this.loading = false;
+                    this.toastr.error(error._body, 'Error');
+                    this.spinner.hide();
                 });
     }
 

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a href="index3.html" class="navbar-brand">
+            <img src="/images/nsuk.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+          </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+        <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link" *ngIf="!auth.isAuthenticated()" [routerLink]='["/login"]' (click)='collapse()'>
+              <i class="nav-icon fa fa-sign-in-alt"></i> LOGIN
+            </a>
+            <a class="nav-link" *ngIf="auth.isAuthenticated()" [routerLink]='["/login"]'  (click)='logout()'>
+                <i class="nav-icon fa fa-sign-out-alt"></i> LOGOUT
+            </a>
+        </li>
+    </ul>
+    </div>
+    </div>
+  </nav> 
+ 
+ 
+ 
+ 

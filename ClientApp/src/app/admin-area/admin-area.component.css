@@ -1,0 +1,13 @@
+.back{
+    background-color: white;
+}
+
+
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus {
+    background-color: rgba(255,255,255,.9) !important;
+    color:#343a40 !important;
+    font-weight: bold;
+    
+}

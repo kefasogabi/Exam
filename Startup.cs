@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Exam.Helper;
+using Exam.Interface;
 using Exam.Models;
 using Exam.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -40,13 +42,31 @@ namespace Exam
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ExamDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<ExamDbContext>
+            (options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
            
+           services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ExamDbContext>()
+            .AddDefaultTokenProviders();
             services.AddAutoMapper();
+
+            services.AddIdentityCore<ApplicationUser>(o =>
+            {
+                // configure identity options
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            });
             
              // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
+            
+            // configure email sender settings
+            services.AddOptions();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
@@ -64,19 +84,23 @@ namespace Exam
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = "https://localhost:5001/",
+                    ValidAudience = "https://localhost:5001/"
+                    
+                    
                 };
             });
 
            
             // configure DI for application services
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAdminService, AdminService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IDashBoardService, DashBoardService>();
+            services.AddTransient<Interface.IEmailSender, EmailSender>();
             
-           
-
-
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

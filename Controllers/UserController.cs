@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using Exam.Dtos;
 using Exam.Helper;
+using Exam.Interface;
 using Exam.Models;
 using Exam.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -19,27 +21,30 @@ namespace Exam.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-          private IUserService _userService;
+          private IStaffService _userService;
         private IMapper _mapper;
+        private readonly IEmailSender emailsender;
         private readonly AppSettings _appSettings;
 
         public UserController(
-            IUserService userService,
+            IStaffService userService,
             IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IEmailSender emailsender)
         {
             _userService = userService;
             _mapper = mapper;
+            this.emailsender = emailsender;
             _appSettings = appSettings.Value;
         }
 
         [AllowAnonymous]
         [HttpPost("/api/Login")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]StaffDto StaffDto)
         {
-            var user = _userService.Authenticate(userDto.Loginid, userDto.Password);
+            var staff = _userService.Authenticate(StaffDto.Loginid, StaffDto.Password);
 
-            if (user == null)
+            if (staff == null)
                 return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -48,48 +53,38 @@ namespace Exam.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[] 
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                     new Claim(ClaimTypes.GivenName, user.Username.ToString()),
-                      new Claim(ClaimTypes.Email, user.Email.ToString()),
-                      new Claim(ClaimTypes.NameIdentifier, user.Loginid.ToString()),
+                    new Claim(ClaimTypes.Name, staff.Id.ToString()),
+                     new Claim(ClaimTypes.GivenName, staff.Username.ToString()),
+                      new Claim(ClaimTypes.Email, staff.Email.ToString()),
+                      new Claim(ClaimTypes.NameIdentifier, staff.Loginid.ToString()),
                   
 
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = "https://localhost:5001/",
+		        Audience = "https://localhost:5001/",
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
             // return basic user info (without password) and token to store client side
-            return Ok(new {
-                Id = user.Id,
-                Username = user.Username,
-                 Loginid = user.Loginid,
-                 Email = user.Email,
-                 TimeSpent = user.TimeSpent,
-                 Score = user.Score,
-                 City = user.City,
-                 Phone = user.Phone,
-                 Address = user.Address,
-                Token = tokenString,
-               
-            });
+            return Ok(new { token = tokenString });
         }
 
 
          [AllowAnonymous]
         [HttpPost("/api/Register")]
-        public IActionResult Register([FromBody]UserDto userDto)
+        public IActionResult Register([FromBody]StaffDto staffDto)
         {
             // map dto to entity
-            var user = _mapper.Map<User>(userDto);
+            var staff = _mapper.Map<Staff>(staffDto);
 
             try 
             {
                 // save 
-                _userService.Create(user, userDto.Password);
-                return Ok();
+                _userService.Create(staff, staffDto.Password);
+                return Ok(staff);
             } 
             catch(AppException ex)
             {
@@ -102,30 +97,40 @@ namespace Exam.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users =  _userService.GetAll();
-            var userDtos = _mapper.Map<IList<UserDto>>(users);
-            return Ok(userDtos);
+            var staffs =  _userService.GetAll();
+            var staffDtos = _mapper.Map<IList<StaffDto>>(staffs);
+            return Ok(staffDtos);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user =  _userService.GetById(id);
-            var userDto = _mapper.Map<UserDto>(user);
-            return Ok(userDto);
+            var staff =  _userService.GetById(id);
+            var staffDto = _mapper.Map<StaffDto>(staff);
+            return Ok(staffDto);
+        }
+
+        [HttpGet("/api/GetStaff/{loginId}")]
+        public async Task<IActionResult> GetStaff(string loginId)
+        {
+            var staff = await _userService.GetStaff(loginId);
+            if(staff == null)
+                return NotFound("User Not Found");
+            var staffDto = _mapper.Map<StaffDto>(staff);
+            return Ok(staffDto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public IActionResult Update(int id, [FromBody]StaffDto staffDto)
         {
             // map dto to entity and set id
-            var user = _mapper.Map<User>(userDto);
-            user.Id = id;
+            var staff = _mapper.Map<Staff>(staffDto);
+            staff.Id = id;
 
             try 
             {
                 // save 
-                _userService.Update(user, userDto.Password);
+                _userService.Update(staff, staffDto.Password);
                 return Ok();
             } 
             catch(AppException ex)

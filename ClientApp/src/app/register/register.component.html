@@ -1,51 +1,96 @@
-<div class="col-md-4 col-md-offset-4">
-  <h2 style="font-weight: bolder; color: #4189C7;" align="center">REGISTER</h2>
-  <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !loginid.valid }">
-          <!-- <label for="firstName">First Name</label> -->
-          <input type="text" class="form-control inp" name="loginid" [(ngModel)]="model.loginid" #loginid="ngModel" placeholder=" Login Id" required />
-          <div *ngIf="f.submitted && !loginid.valid" class="help-block">Login Id is required</div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <!-- <label for="lastName">Last Name</label> -->
-          <input type="email" class="form-control inp" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="Email" required />
-          <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-          <!-- <label for="username">Username</label> -->
-          <input type="text" class="form-control inp" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username" required />
-          <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-          <!-- <label for="password">Password</label> -->
-          <input type="password" class="form-control inp" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" required />
-          <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-      </div>
-     
+
       
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !phone.valid }">
-        <!-- <label for="lastName">Last Name</label> -->
-        <input type="text" class="form-control inp" name="phone" [(ngModel)]="model.phone" #phone="ngModel" placeholder="Phone" required />
-        <div *ngIf="f.submitted && !phone.valid" class="help-block">Phone is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
-        <!-- <label for="lastName">Last Name</label> -->
-        <input type="text" class="form-control inp" name="city" [(ngModel)]="model.city" #city="ngModel" placeholder="City" required />
-        <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
-    </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
-        <!-- <label for="lastName">Last Name</label> -->
-        <input type="text" class="form-control inp" name="address" [(ngModel)]="model.address" #address="ngModel" placeholder="Address" required />
-        <div *ngIf="f.submitted && !address.valid" class="help-block">Address is required</div>
-    </div>
-   
-      <div class="form-group">
-          <button [disabled]="loading" class="btn btn-primary form-control inp but ">Register</button>
-          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-         
+      <div class="register-box">
+        <div  class="register-logo">
+          <a *ngIf="!auth.isAuthenticated()" href="#"><b>Admin</b>LTE</a>
+        </div>
+      
+        <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg">New Staff Registration</p>
+      
+            <form name="form" (ngSubmit)="register(f)" #f="ngForm" novalidate>
+
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="userName" [(ngModel)]="model.userName" required #userName="ngModel" placeholder="FullName">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-key"></span>
+                    </div>
+                  </div>
+                </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="loginid" [(ngModel)]="model.loginid" required #loginid="ngModel" placeholder="Login Id">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div *ngIf="username.touched && username.invalid" class="validation-error">Username is required</div> -->
+              <div class="input-group mb-3">
+                <select class="form-control" [(ngModel)]="model.sexId" name="sexId" required #sexId="ngModel" >
+                  <option  >Select Sex</option>
+                  <option *ngFor="let s of sex"  value="{{s.id}}">{{s.name}}</option>
+              </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-genderless"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="email" [(ngModel)]="model.email" required #email="ngModel" placeholder="Email">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="phone" [(ngModel)]="model.phone" required #phone="ngModel" placeholder="Phone">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-phone"></span>
+                    </div>
+                  </div>
+                </div>
+              <div class="input-group mb-3">
+                  <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" required />
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Retype password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div> -->
+              <div class="row">
+                <!-- <div class="col-8">
+                  <div class="icheck-primary">
+                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                    <label for="agreeTerms">
+                     I agree to the <a href="#">terms</a>
+                    </label>
+                  </div>
+                </div> -->
+                <!-- /.col -->
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+            <!-- <a [routerLink]='["/login"]' class="text-center">I already have a membership</a> -->
+          </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
       </div>
-      <div class="form-group">
-        <a style="font-size: 20px;" [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-      </div>
-  </form>
-</div>
+      <!-- /.register-box -->
+ 

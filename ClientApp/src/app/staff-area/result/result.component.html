@@ -1,0 +1,54 @@
+
+
+<div style="margin-top: 40px;" class="row">
+    <div class="col-md-8 offset-md-2">
+      
+  
+      <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Completed!</h3>
+          </div>
+          <div class="panel-body">
+           <!-- <h4>{{currentUser.username}}</h4> -->
+           <h4>{{quizService.correctAnswerCount}}/10</h4>
+           <span>Time Elapsed : {{quizService.displayTimeElapsed()}}</span>
+           <br><br>
+           <button (click)="OnSubmit()" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+
+
+
+        <!-- Question with correct answer -->
+
+        <h3 style="font-weight: bolder; color: black; text-shadow: 2px 2px 5px #4189C7;">Questions with correct answer</h3>
+        <ng-container *ngFor="let qn of quizService.qns; let i=index ">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 align="center" class="panel-title">Question {{ i+1 }}</h3> 
+                  <br> 
+                  <p style="font-weight: bold;"> {{qn.qn}}</p>
+                </div>
+                <div style="background: #4189C7;" class="panel-body">
+                     
+                          <div  class="list-group"> 
+                              <ng-container *ngFor=" let option of qn.options; let j = index " >
+                              <a 
+                              style="font-weight: bold; cursor: pointer;"
+                              class="list-group-item list-group-item-info" 
+                              *ngIf="option != null " >
+                                {{ option }}
+                                <span *ngIf="qn.correct==j" class="glyphicon green-text glyphicon-ok-sign">Correct</span>
+                                <span *ngIf="qn.answer==j && qn.correct !=j" class="glyphicon red-text glyphicon-ok-sign">Incorrect</span>
+                              </a> 
+                            </ng-container>
+                            </div>
+                      
+                </div>
+              </div>
+
+        </ng-container>
+  
+    </div>
+  </div>

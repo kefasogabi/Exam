@@ -3,114 +3,108 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Exam.Helper;
+using Exam.Interface;
 using Exam.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Exam.Services
 {
 
-
-    public interface IUserService
-    {
-        User Authenticate(string loginid, string password);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-        User Create(User user, string password);
-        void Update(User user, string password = null);
-        void Delete(int id);
-    }
-    public class UserService : IUserService
+    public class StaffService : IStaffService
     {
 
         private readonly ExamDbContext context;
 
-      
 
-        public UserService(ExamDbContext context )
+        private readonly IEmailSender emailsender;
+
+        public StaffService(ExamDbContext context, IEmailSender emailsender)
         {
-          
+            this.emailsender = emailsender;
+
             this.context = context;
 
         }
 
-        public User Authenticate(string loginid, string password)
+        public Staff Authenticate(string loginid, string password)
         {
             if (string.IsNullOrEmpty(loginid) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = context.Users.SingleOrDefault(x => x.Loginid == loginid);
+            var staff = context.staffs.SingleOrDefault(x => x.Loginid == loginid);
 
             // check if username exists
-            if (user == null)
+            if (staff == null)
                 return null;
 
             // check if password is correct
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(password, staff.PasswordHash, staff.PasswordSalt))
                 return null;
 
             // authentication successful
-            return user;
+            return staff;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Staff> GetAll()
         {
-            return context.Users;
+            return context.staffs;
         }
 
-        public User GetById(int id)
+        public Staff GetById(int id)
         {
-            return context.Users.Find(id);
+            return context.staffs.Find(id);
         }
 
-        public User Create(User user, string password)
+        public Staff Create(Staff staff, string password)
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (context.Users.Any(x => x.Loginid == user.Loginid))
-                throw new AppException("LoginId " + user.Loginid + " is already taken");
+            if (context.staffs.Any(x => x.Loginid == staff.Loginid))
+                throw new AppException("LoginId " + staff.Loginid + " is already taken");
 
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            context.Users.Add(user);
+            staff.IsEmailVerified = false;
+            staff.ActivationCode = Guid.NewGuid();
+            staff.PasswordHash = passwordHash;
+            staff.PasswordSalt = passwordSalt;
+            context.staffs.Add(staff);
             context.SaveChanges();
 
-            return user;
+            // await emailsender.SendEmailAsync(staff.Email, staff.ActivationCode.ToString());
+
+            return staff;
         }
 
-        
 
-        
 
-        public void Update(User userParam, string password = null)
+
+
+        public void Update(Staff staffParam, string password = null)
         {
-            var user = context.Users.Find(userParam.Id);
+            var staff = context.staffs.Find(staffParam.Id);
 
-            if (user == null)
+            if (staff == null)
                 throw new AppException("User not found");
 
-            if (userParam.Loginid != user.Loginid)
+            if (staffParam.Loginid != staff.Loginid)
             {
                 // username has changed so check if the new username is already taken
-                if (context.Users.Any(x => x.Loginid == userParam.Loginid))
-                    throw new AppException("LoginId " + userParam.Loginid + " is already taken");
+                if (context.staffs.Any(x => x.Loginid == staffParam.Loginid))
+                    throw new AppException("LoginId " + staffParam.Loginid + " is already taken");
             }
 
             // update user properties
-            user.Loginid = userParam.Loginid;
-            user.Email = userParam.Email;
-            user.Username = userParam.Username;
-            user.Address = userParam.Address;
-            user.Phone = userParam.Phone;
-            user.City = userParam.City;
-            user.TimeSpent = userParam.TimeSpent;
-            user.Score = userParam.Score;
+            staff.Loginid = staffParam.Loginid;
+            staff.Email = staffParam.Email;
+            staff.Username = staffParam.Username;
+            staff.Phone = staffParam.Phone;
+            staff.TimeSpent = staffParam.TimeSpent;
+            staff.Score = staffParam.Score;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
@@ -118,22 +112,29 @@ namespace Exam.Services
                 byte[] passwordHash, passwordSalt;
                 CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
+                staff.PasswordHash = passwordHash;
+                staff.PasswordSalt = passwordSalt;
             }
 
-            context.Users.Update(user);
+            context.staffs.Update(staff);
             context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var user = context.Users.SingleOrDefault(c => c.Id == id);
-            if (user != null)
+            var staff = context.staffs.SingleOrDefault(c => c.Id == id);
+            if (staff != null)
             {
-                context.Users.Remove(user);
+                context.staffs.Remove(staff);
                 context.SaveChanges();
             }
+        }
+
+        public async Task<Staff> GetStaff(string loginId)
+        {
+            var staff = await context.staffs.Include(s => s.Sex)
+                                            .SingleOrDefaultAsync(c => c.Loginid == loginId);
+            return staff;
         }
 
 

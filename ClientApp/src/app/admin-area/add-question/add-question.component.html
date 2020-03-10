@@ -1,0 +1,78 @@
+
+
+
+      
+      <div class="register-box">
+        <div class="register-logo">
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg">Add a New Question</p>
+      
+            <form name="form" #reg="ngForm" (ngSubmit)="onSubmit(reg)" novalidate>
+              <input *ngIf="quest.id" type="hidden" name="id" #id="ngModel" [(ngModel)]="quest.id"   >
+              <div class="input-group mb-3">
+                <textarea  type="text" name="qn"  #qn="ngModel"  [(ngModel)]="quest.qn" class="form-control tex "  required placeholder="Enter Question"   ></textarea>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class=""></span>
+                    </div>
+                  </div>
+                </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="option1" #option1="ngModel" [(ngModel)]="quest.option1"  required  placeholder="Enter Option 1">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class=""></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="option2" #option2="ngModel" [(ngModel)]="quest.option2" required  placeholder="Enter Option 2">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class=""></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="option3" #option3="ngModel" [(ngModel)]="quest.option3" required  placeholder="Enter Option 3">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class=""></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="option4" #option4="ngModel" [(ngModel)]="quest.option4" required  placeholder="Enter Option 4">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class=""></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="answer" #answer="ngModel" [(ngModel)]="quest.answer" required  placeholder="Enter Answer" />
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class=""></span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">SUBMIT</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+            
+          </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
+      </div>
+      <!-- /.register-box -->
+ 

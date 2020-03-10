@@ -1,0 +1,43 @@
+<div style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-md-3">
+      <form >
+        <div class="form-group ">
+          <input type="text" class="form-control " [(ngModel)]="loginId" name="loginId"  placeholder="Login ID" />
+        </div>
+            <button (click)="getStaff()" class="btn btn-primary btn-block "><span class="fas fa-search"></span> Search</button>
+      </form>
+      <br>
+
+       <!-- Profile Image -->
+       <div *ngIf="user" class="card card-primary card-outline">
+        <div class="card-body box-profile">
+          <!-- <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle"
+                 src="/uploads/{{student.fileName}}"
+                 alt="User profile picture">
+          </div> -->
+          <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+              <b>Login ID</b> <b class="float-right">{{user.loginid}}</b>
+            </li>
+            <li class="list-group-item">
+              <b>Username</b> <b class="float-right">{{user.username}}</b>
+            </li>
+            <li class="list-group-item">
+              <b>Email</b> <b class="float-right">{{user.email}}</b>
+            </li>
+            <li class="list-group-item">
+              <b>Sex</b> <b class="float-right">{{user.sex.name}}</b>
+            </li>
+          </ul>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-md-9">
+
+    </div>
+  </div>
+</div>

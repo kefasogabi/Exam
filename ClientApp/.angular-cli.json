@@ -20,14 +20,44 @@
       "styles": [
         "styles.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/datatables.net-dt/css/jquery.dataTables.css"
+        "../src/plugins/fontawesome-free/css/all.min.css",
+        "../src/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+        "../src/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+        "../src/plugins/jqvmap/jqvmap.min.css",
+        "../src/dist/css/adminlte.min.css",
+        "../src/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+        "../src/plugins/daterangepicker/daterangepicker.css",
+        "../src/plugins/summernote/summernote-bs4.css",
+        "../src/plugins/datatables/dataTables.bootstrap4.css",
+        "../src/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css",
+        "../src/plugins/select2/css/select2.min.css",
+        "../src/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css",
+        "../src/plugins/toastr/toastr.min.css",
+        "../src/plugins/sweetalert2/sweetalert2.min.css"
 
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.js",
-        "../node_modules/datatables.net/js/jquery.dataTables.js"
-
+        "../src/plugins/jquery/jquery.min.js",
+        "../src/plugins/jquery-ui/jquery-ui.min.js",
+        "../src/plugins/bootstrap/js/bootstrap.bundle.min.js",
+        "../src/plugins/chart.js/Chart.min.js",
+        "../src/plugins/sparklines/sparkline.js",
+        "../src/plugins/jqvmap/jquery.vmap.min.js",
+        "../src/plugins/jqvmap/maps/jquery.vmap.world.js",
+        "../src/plugins/jquery-knob/jquery.knob.min.js",
+        "../src/plugins/moment/moment.min.js",
+        "../src/plugins/daterangepicker/daterangepicker.js",
+        "../src/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+        "../src/plugins/summernote/summernote-bs4.min.js",
+        "../src/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+        "../src/plugins/fastclick/fastclick.js",
+        "../src/dist/js/adminlte.min.js",
+        "../src/dist/js/pages/dashboard.js",
+        "../src/dist/js/demo.js",
+        "../src/plugins/datatables/jquery.dataTables.js",
+        "../src/plugins/datatables/dataTables.bootstrap4.js",
+        "../src/plugins/toastr/toastr.min.js"
+        
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

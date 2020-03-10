@@ -8,10 +8,12 @@ namespace Exam.Helper
     {
         public MappingProfile()
         {
-             CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
-            CreateMap<Admin, AdminDto>();
-            CreateMap<AdminDto, Admin>();
+            CreateMap<Staff, StaffDto>();
+            CreateMap<StaffDto, Staff>();
+
+            CreateMap<Sex, SexDto>();
+            CreateMap<SexDto, Sex>();
+            
         }
     }
 }
