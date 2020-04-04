@@ -14,12 +14,12 @@
         <td>{{user.firstName}} {{user.lastName}}</td>
         <td>{{user.email}}</td>
         <td>
-          <a [routerLink]="['/ViewUser', user.id]" class="btn btn-primary btn-sm" >
+          <a [routerLink]="['/admin/view', user.id]" class="btn btn-primary btn-sm" >
             <i class="fas fa-folder">
             </i>
             View
           </a>
-          <a [routerLink]="['', user.id]" class="btn btn-info btn-sm" >
+          <a [routerLink]="['/admin/edit', user.id]" class="btn btn-info btn-sm" >
             <i class="fas fa-pencil-alt">
             </i>
             Edit

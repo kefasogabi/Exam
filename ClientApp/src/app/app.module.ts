@@ -1,3 +1,4 @@
+import { EdituserComponent } from './admin-area/edituser/edituser.component';
 import { AccountService } from './Services/account.service';
 import { LoginComponent } from './login/login.component';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -38,6 +39,9 @@ import { SearchComponent } from './admin-area/search/search.component';
 import { AdminGuard } from './auth/admin-guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { StaffGuard } from './auth/Staff-guard';
+import { EditAdminComponent } from './admin-area/edit-admin/edit-admin.component';
+import { ViewAdminComponent } from './admin-area/view-admin/view-admin.component';
+import { AdminProfileComponent } from './admin-area/admin-profile/admin-profile.component';
 
 
 
@@ -65,7 +69,11 @@ import { StaffGuard } from './auth/Staff-guard';
     UsersComponent,
     AdminsComponent,
     ChangePasswordComponent,
-    SearchComponent
+    SearchComponent,
+    EdituserComponent,
+    EditAdminComponent,
+    ViewAdminComponent,
+    AdminProfileComponent
     
    
 
@@ -92,7 +100,7 @@ import { StaffGuard } from './auth/Staff-guard';
       { path: 'staff/exam', component: StaffAreaComponent,
         children: [{ path: '', component: QuizComponent }]
       },
-      { path: 'profile', component: StaffAreaComponent,
+      { path: 'staff/profile', component: StaffAreaComponent,
         children: [{path: '', component: ProfileComponent}]
       },
 
@@ -119,6 +127,9 @@ import { StaffGuard } from './auth/Staff-guard';
       { path: 'ViewUser/:id', component: AdminAreaComponent,
         children: [{ path: '', component: ViewUserComponent }]
       },
+      { path: 'EditUser/:id', component: AdminAreaComponent,
+        children: [{ path: '', component: EdituserComponent}]
+      },
       { path: 'admin/dashboard', component: AdminAreaComponent,
         children: [{ path: '', component: DashboardComponent}]
       },
@@ -127,6 +138,12 @@ import { StaffGuard } from './auth/Staff-guard';
       },
       { path: 'admin/users', component: AdminAreaComponent,
         children: [{ path: '', component: UsersComponent}]
+      },
+      { path: 'admin/edit/:id', component: AdminAreaComponent,
+        children: [{ path: '', component: EditAdminComponent}]
+      },
+      { path: 'admin/view/:id', component: AdminAreaComponent,
+        children: [{ path: '', component: ViewAdminComponent}]
       },
       { path: 'admin/admins', component: AdminAreaComponent,
         children: [{ path: '', component: AdminsComponent}]
@@ -139,6 +156,9 @@ import { StaffGuard } from './auth/Staff-guard';
       },
       { path: 'admin/search-staff', component: AdminAreaComponent,
         children: [{ path: '', component: SearchComponent}]
+      },
+      { path: 'admin/profile', component: AdminAreaComponent,
+        children: [{ path: '', component: AdminProfileComponent}]
       },
 
     ])

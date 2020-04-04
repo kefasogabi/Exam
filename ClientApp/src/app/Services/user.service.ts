@@ -41,5 +41,9 @@ export class UserService {
     return this.http.get('/api/GetStaff/'+ loginId);
   }
 
+  getProfile(){
+    return this.http.get('/api/getProfile');
+  }
+
 
 }

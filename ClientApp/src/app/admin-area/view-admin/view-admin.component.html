@@ -12,26 +12,23 @@
           </div>
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
-              <b>Login ID</b> <b class="float-right">{{person.loginid}}</b>
+              <b>Login ID</b> <b class="float-right">{{person.firstName}}</b>
             </li>
             <li class="list-group-item">
-              <b>Username</b> <b class="float-right">{{person.username}}</b>
+              <b>Username</b> <b class="float-right">{{person.lastName}}</b>
             </li>
             <li class="list-group-item">
               <b>Email</b> <b class="float-right">{{person.email}}</b>
             </li>
             <li class="list-group-item">
-                <b>Phone</b> <b class="float-right">{{person.phone}}</b>
+                <b>Date Of Birth</b> <b class="float-right">{{person.dateOfBirth}}</b>
               </li>
             <li class="list-group-item">
               <b>Sex</b> <b class="float-right">{{person.sex.name}}</b>
             </li>
-            <li *ngIf="person.score" class="list-group-item">
-              <b>Score</b> <b class="float-right">{{person.score}}</b>
+            <li class="list-group-item">
+              <b>Address</b> <b class="float-right">{{person.address}}</b>
             </li>
-          <li *ngIf="person.timeSpent" class="list-group-item">
-            <b>Time Spent</b> <b class="float-right">{{person.timeSpent}} Seconds</b>
-          </li>
           </ul>
         </div>
         <!-- /.card-body -->
@@ -42,3 +39,4 @@
 
   </div>
 </div>
+

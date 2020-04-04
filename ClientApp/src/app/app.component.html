@@ -1,17 +1,19 @@
 
     <div>
       
-      <div  >
-        <router-outlet></router-outlet>
+      <div >
+        <router-outlet>
+          <ngx-spinner
+            bdColor="rgba(51,51,51,0.0)"
+            size="medium"
+            color="#3498db"
+            type="ball-spin-clockwise-fade">
+            <p  style="font-size: 20px; color: white">Loading...</p>
+          </ngx-spinner>
+        </router-outlet>
       </div>
      
-     <ngx-spinner
-     bdColor="rgba(51,51,51,0.0)"
-     size="medium"
-     color="#3498db"
-     type="ball-spin-clockwise-fade">
-    <p  style="font-size: 20px; color: white">Loading...</p>
-   </ngx-spinner>
+     
   </div>
 
 

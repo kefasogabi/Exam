@@ -20,7 +20,7 @@ using static Exam.Models.Account;
 
 namespace Exam.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -136,7 +136,7 @@ namespace Exam.Controllers
             [HttpGet]
             public async Task<IActionResult> GetAll()
             {
-                var users = await userManager.Users.ToListAsync();
+                var users = await userManager.Users.Include(c => c.Sex).ToListAsync();
                 
                 return Ok(users);
             } 
@@ -146,7 +146,7 @@ namespace Exam.Controllers
             public async Task<IActionResult> GetById(string id)
             {
                 
-                var user = await userManager.Users.SingleOrDefaultAsync(c => c.Id == id);
+                var user = await userManager.Users.Include(c => c.Sex).SingleOrDefaultAsync(c => c.Id == id);
                                                     
                 if(user == null)
                 {
@@ -162,7 +162,7 @@ namespace Exam.Controllers
                 
                     var userId = caller.Claims.Single(c => c.Type == ClaimTypes.Name);
 
-                    var user = await userManager.Users.SingleOrDefaultAsync( c => c.Id == userId.Value);
+                    var user = await userManager.Users.Include(c => c.Sex).SingleOrDefaultAsync( c => c.Id == userId.Value);
 
                     return Ok(user);
                 
@@ -197,6 +197,7 @@ namespace Exam.Controllers
                 user.LastName = model.LastName;
                 user.Address = model.Address;
                 user.DateOfBirth = model.DateOfBirth;
+                user.SexId = model.SexId;
 
                await userManager.UpdateAsync(user);
               

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,14 @@ using Exam.Interface;
 using Exam.Models;
 using Exam.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Exam.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]")]
     public class UserController : Controller
     {
@@ -25,15 +27,18 @@ namespace Exam.Controllers
         private IMapper _mapper;
         private readonly IEmailSender emailsender;
         private readonly AppSettings _appSettings;
+        private readonly ClaimsPrincipal caller;
 
         public UserController(
             IStaffService userService,
             IMapper mapper,
             IOptions<AppSettings> appSettings,
+            IHttpContextAccessor httpContextAccessor,
             IEmailSender emailsender)
         {
             _userService = userService;
             _mapper = mapper;
+            caller = httpContextAccessor.HttpContext.User;
             this.emailsender = emailsender;
             _appSettings = appSettings.Value;
         }
@@ -103,11 +108,22 @@ namespace Exam.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var staff =  _userService.GetById(id);
+            var staff = await _userService.GetByIdAsync(id);
             var staffDto = _mapper.Map<StaffDto>(staff);
             return Ok(staffDto);
+        }
+
+        [HttpGet("/api/getProfile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var userId = caller.Claims.Single(c => c.Type == ClaimTypes.Name);
+            
+           var staff = await _userService.GetByIdAsync(Convert.ToInt32(userId.Value));
+           var staffDto = _mapper.Map<StaffDto>(staff);
+            
+            return Ok(staffDto );
         }
 
         [HttpGet("/api/GetStaff/{loginId}")]
@@ -139,6 +155,27 @@ namespace Exam.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("/api/SubmitScore")]
+        public IActionResult SubmitScore( [FromBody] ResultDto resultDto)
+        {
+            var staff = _mapper.Map<Result>(resultDto);
+             var userId = caller.Claims.Single(c => c.Type == ClaimTypes.Name);
+            staff.Id = Convert.ToInt32(userId.Value);
+            
+            try 
+            {
+                // save 
+                _userService.SubmitScore(staff);
+                return Ok();
+            } 
+            catch(AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(ex.Message);
+            }
+        }
+
          [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

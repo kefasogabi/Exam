@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
 import { QuizService } from '../../Services/quiz.service';
 import { Router } from '@angular/router';
 
@@ -10,12 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-  // currentUser: User;
 
 
-  constructor( private quizService: QuizService,private router: Router) {
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-   }
+  constructor( private quizService: QuizService,private router: Router) {}
 
   ngOnInit() {
 
@@ -58,17 +53,8 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('qnProgress', "");
     localStorage.setItem('seconds', "");
     localStorage.setItem('qns', "");
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/staff/profile']);
   }
-
-  // checkuser(){
-  //   let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  //   if(currentUser.score != null)
-  //     this.router.navigate(['/profile']);
-  //     else
-  //     this.router.navigate(['/quiz']);
-      
-  // }
 
   
 }

@@ -13,6 +13,9 @@ namespace Exam.Helper
 
             CreateMap<Sex, SexDto>();
             CreateMap<SexDto, Sex>();
+
+            CreateMap<ResultDto, ResultDto>();
+            CreateMap<Result, ResultDto>();
             
         }
     }

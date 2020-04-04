@@ -1,3 +1,4 @@
+import { AccountService } from './../Services/account.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-area.component.css']
 })
 export class AdminAreaComponent implements OnInit {
-
-  constructor() { }
+ user ={};
+  constructor( private account:AccountService) { }
 
   ngOnInit() {
+    this.account.getUserProfile().subscribe((data:any) => { this.user = data});
   }
 
 }

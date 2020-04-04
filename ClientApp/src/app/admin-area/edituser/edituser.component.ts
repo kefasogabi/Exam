@@ -11,18 +11,24 @@ import { EditUser } from '../../models/user.model';
   styleUrls: ['./edituser.component.css']
 })
 export class EdituserComponent implements OnInit {
-person ={};
+model ={};
 editUser: EditUser;
+sex: any[];
 
   constructor(private userService: UserService,
               private toastr: ToastrService,
               private route: ActivatedRoute,            
               ) { 
                 let id = this.route.snapshot.paramMap.get('id');
-                if (id) this.userService.getById(id).take(1).subscribe(q => this.person = q );
+                if (id) this.userService.getById(id).take(1).subscribe((data:any) => {
+                  this.model = data
+                });
               }
 
   ngOnInit() {
+    this.userService.getSex().subscribe((data:any) =>{
+      this.sex = data;
+    })
     this.resetForm()
   }
 
@@ -44,8 +50,6 @@ editUser: EditUser;
       username: '',
       email: '',
       phone: '',
-      city: '',
-      address: '',
       score: '',
       timeSpent: '',
     }

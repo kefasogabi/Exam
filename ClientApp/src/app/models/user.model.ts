@@ -26,8 +26,6 @@ export class EditUser {
     loginid: any;
     username: string;
     email: string;
-    address: string;
-    city: string;
     phone: string;
     timeSpent: string;
     score: string;

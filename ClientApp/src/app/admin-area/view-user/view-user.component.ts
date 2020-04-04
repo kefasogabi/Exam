@@ -8,10 +8,18 @@ import { UserService } from '../../Services/user.service';
   styleUrls: ['./view-user.component.css']
 })
 export class ViewUserComponent implements OnInit {
-user ={};
+person ={
+  sex: {
+    id: 0,
+    name: ""
+  },
+};
   constructor(private userService: UserService,private route: ActivatedRoute ) {
     let id = this.route.snapshot.paramMap.get('id');
-    if (id) this.userService.getById(id).take(1).subscribe(data => this.user = data );
+    if (id) this.userService.getById(id).take(1).subscribe( (data:any) => {
+      this.person = data
+      console.log(this.person);
+    });
    }
 
   ngOnInit() {

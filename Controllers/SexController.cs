@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Exam.Dtos;
 using Exam.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ namespace Exam.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("/api/sex")]
         public async Task<IEnumerable<SexDto>> GetSex()
         {

@@ -10,25 +10,22 @@ import { User } from '../../models/user.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user = new User;
-  id: number;
-  person = {};
-  constructor(private userService: UserService, private route: ActivatedRoute) {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let id = currentUser.id
-    if (id) this.userService.getById(id).take(1).subscribe(data => this.person = data );
-   }
+  person = {
+    sex: {
+      id: 0,
+      name: ""
+    },
+  };
+  
+  constructor(private userService: UserService, private route: ActivatedRoute) {  }
 
   ngOnInit() {
+
+    this.userService.getProfile().subscribe((data:any)=>{
+      this.person = data;
+    });
     
   }
   
-getUserId(id : number){
- 
-    this.userService.getById(id).subscribe((user:any) => {
-        this.user = user;
-    })
-    
-}
 
 }

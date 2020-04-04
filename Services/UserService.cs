@@ -49,12 +49,12 @@ namespace Exam.Services
 
         public IEnumerable<Staff> GetAll()
         {
-            return context.staffs;
+            return context.staffs.Include(c => c.Sex).ToList();
         }
 
-        public Staff GetById(int id)
+        public async Task<Staff> GetByIdAsync(int id)
         {
-            return context.staffs.Find(id);
+            return await context.staffs.Include(c => c.Sex).SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public Staff Create(Staff staff, string password)
@@ -80,7 +80,20 @@ namespace Exam.Services
             return staff;
         }
 
+        public void SubmitScore(Result staffParam)
+        {
+            var staff = context.staffs.Find(staffParam.Id);
 
+            if (staff == null)
+                throw new AppException("User not found");
+
+            // update exam record
+            staff.TimeSpent = staffParam.TimeSpent;
+            staff.Score = staffParam.Score;    
+
+            context.staffs.Update(staff);
+            context.SaveChanges();
+        }
 
 
 
@@ -172,5 +185,6 @@ namespace Exam.Services
             return true;
         }
 
+       
     }
 }

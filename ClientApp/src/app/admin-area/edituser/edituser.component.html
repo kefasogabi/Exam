@@ -1,45 +1,84 @@
-<div class="container">
-    <div  class=" col-md-4 col-md-offset-4 " style=" margin-bottom: 20px !important; ">
-  
-        <form #reg="ngForm" (ngSubmit)="onUpdate(reg)" >
-  
-            <input  type="hidden" name="id" #id="ngModel" [(ngModel)]="person.id" class="form-control inp "  required  placeholder="Enter Option 1"  >
-        
-          <div class="form-group">
-            <!-- <label for="">PassWord</label> -->
-            <input  type="text" name="loginid" #loginid="ngModel" [(ngModel)]="person.loginid" class="form-control inp "  required  placeholder="LoginId"  >
-          </div>
-          <div class="form-group">
-            <!-- <label for="">PassWord</label> -->
-            <input  type="text" name="email" #email="ngModel"  [(ngModel)]="person.email" class="form-control inp "  required  placeholder="Email"  >
-          </div>
-          <div class="form-group">
-            <!-- <label for="">PassWord</label> -->
-            <input  type="text" name="username" #username="ngModel" [(ngModel)]="person.username" class="form-control inp "  required  placeholder="UserName"  >
-          </div>
-          <div class="form-group">
-            <!-- <label for="">PassWord</label> -->
-            <input  type="text" name="phone" #phone="ngModel"  [(ngModel)]="person.phone" class="form-control inp "  required  placeholder="Phone"  >
-          </div>
-          <div class="form-group">
-            <!-- <label for="">PassWord</label> -->
-            <input  type="text" name="city" #city="ngModel" [(ngModel)]="person.city" class="form-control inp "  required  placeholder="City"  >
-          </div>
-          <div class="form-group">
-              <!-- <label for="">PassWord</label> -->
-              <input  type="text" name="address" #address="ngModel" [(ngModel)]="person.address" class="form-control inp "  required  placeholder="Address"  >
-            </div>
-            <div class="form-group">
-                <!-- <label for="">PassWord</label> -->
-                <input   type="text" name="score" #score="ngModel" [(ngModel)]="person.score" class="form-control inp "  required  placeholder="Score"  >
-              </div>
-              <div class="form-group">
-                  <!-- <label for="">PassWord</label> -->
-                  <input  type="text" name="timeSpent" #timeSpent="ngModel" [(ngModel)]="person.timeSpent" class="form-control inp "  required  placeholder="Time Spent"  >
+
+      
+      <div class="register-box">
+       
+      
+        <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg"><b>Edit User Record</b></p>
+      
+            <form name="form" (ngSubmit)="onUpdate(f)" #f="ngForm" novalidate>
+              <input  type="hidden" name="id" #id="ngModel" [(ngModel)]="model.id"  >
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="userName" [(ngModel)]="model.username" required #userName="ngModel" placeholder="FullName">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                    </div>
+                  </div>
                 </div>
-        <br>
-          <button type="submit" class="btn btn-primary form-control but inp " [disabled]="!reg.valid" >SUBMIT</button>
-        </form>
-  
-  </div>
-  </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="loginid" [(ngModel)]="model.loginid" required #loginid="ngModel" placeholder="Login Id">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-key"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div *ngIf="username.touched && username.invalid" class="validation-error">Username is required</div> -->
+              <div class="input-group mb-3">
+                <select class="form-control" [(ngModel)]="model.sexId" name="sexId" required #sexId="ngModel" >
+                  <option value="0" >Select Sex</option>
+                  <option *ngFor="let s of sex"  value="{{s.id}}">{{s.name}}</option>
+              </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-genderless"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="email" [(ngModel)]="model.email" required #email="ngModel" placeholder="Email">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="phone" [(ngModel)]="model.phone" required #phone="ngModel" placeholder="Phone">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-phone"></span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="model.score" class="input-group mb-3">
+                  <input type="text" class="form-control" name="score" [(ngModel)]="model.score" required #score="ngModel" placeholder="Score">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-phone"></span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="model.timeSpent" class="input-group mb-3">
+                  <input type="text" class="form-control" name="timeSpent" [(ngModel)]="model.timeSpent" required #timeSpent="ngModel" placeholder="timeSpent">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-clock"></span>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                <div  class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">Update</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+             </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
+      </div>
+      <!-- /.register-box -->
+ 

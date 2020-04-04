@@ -1,4 +1,5 @@
-import { User } from '../models/user.model';
+import { UserService } from './user.service';
+import { User, EditUser } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestOptions,Response, Headers, Http } from '@angular/http';
@@ -12,11 +13,11 @@ export class QuizService {
   timer;
   qnProgress: number;
   correctAnswerCount: number = 0;
-  currentUser:User;
+  person:EditUser;
  question: any;
   
   //=======Helper Methods========
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private userService:UserService) {}
 
 
  Questions(){
@@ -52,12 +53,11 @@ export class QuizService {
 
  
   submitScore(){
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     var body = JSON.parse(localStorage.getItem('currentUser'));
-    body.Score =  this.correctAnswerCount;
-    body.TimeSpent = this.seconds;
-    return this.http.put('/user/' + this.currentUser.id, body, );
-
+    var body = {
+      score : this.correctAnswerCount,
+      timeSpent : this.seconds,
+    }
+    return this.http.post('/api/SubmitScore', body);
   }
 
   addQuestion(question:Question  ){

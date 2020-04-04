@@ -2,20 +2,26 @@
       
       <div class="register-box">
         <div  class="register-logo">
-          <a *ngIf="!auth.isAuthenticated()" href="#"><b>Admin</b>LTE</a>
+          <a *ngIf="!auth.isAuthenticated()" [routerLink]='["/register"]'>
+            <div class="text-center">
+              <img class="rounded"
+                   src="/images/nsuk.png"
+                   alt="login-logo">
+            </div>
+          </a>
         </div>
       
         <div class="card">
           <div class="card-body register-card-body">
-            <p class="login-box-msg">New Staff Registration</p>
+            <p class="login-box-msg"><b>New User Registration</b></p>
       
             <form name="form" (ngSubmit)="register(f)" #f="ngForm" novalidate>
-
+              <input  type="hidden" name="id" #id="ngModel" [(ngModel)]="model.id"  >
               <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="userName" [(ngModel)]="model.userName" required #userName="ngModel" placeholder="FullName">
+                  <input type="text" class="form-control" name="userName" [(ngModel)]="model.username" required #userName="ngModel" placeholder="FullName">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-key"></span>
+                      <span class="fas fa-user"></span>
                     </div>
                   </div>
                 </div>
@@ -23,14 +29,14 @@
                 <input type="text" class="form-control" name="loginid" [(ngModel)]="model.loginid" required #loginid="ngModel" placeholder="Login Id">
                 <div class="input-group-append">
                   <div class="input-group-text">
-                    <span class="fas fa-user"></span>
+                    <span class="fas fa-key"></span>
                   </div>
                 </div>
               </div>
               <!-- <div *ngIf="username.touched && username.invalid" class="validation-error">Username is required</div> -->
               <div class="input-group mb-3">
                 <select class="form-control" [(ngModel)]="model.sexId" name="sexId" required #sexId="ngModel" >
-                  <option  >Select Sex</option>
+                  <option value="" >Select Sex</option>
                   <option *ngFor="let s of sex"  value="{{s.id}}">{{s.name}}</option>
               </select>
                 <div class="input-group-append">
@@ -81,13 +87,13 @@
                   </div>
                 </div> -->
                 <!-- /.col -->
-                <div class="col-12">
+                <div  class="col-12">
                   <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                 </div>
                 <!-- /.col -->
               </div>
             </form>
-            <!-- <a [routerLink]='["/login"]' class="text-center">I already have a membership</a> -->
+            <a  *ngIf="!auth.isAuthenticated()" [routerLink]='["/login"]' class="text-center">I already have an Account?</a>
           </div>
           <!-- /.form-box -->
         </div><!-- /.card -->

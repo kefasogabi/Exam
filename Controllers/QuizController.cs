@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exam.Controllers
 {
-    [Authorize]
+    
     public class QuizController : Controller
     {
         private readonly ExamDbContext context;
@@ -29,7 +29,7 @@ namespace Exam.Controllers
             .Take(10)
             .ToArray();
 
-            var  updated =   Qns.AsEnumerable()
+            var  updated =   Qns.AsEnumerable() 
             .Select(x => new
             {
                 Id = x.Id,

@@ -1,3 +1,31 @@
 
 
 
+.home{
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+   
+   margin-top: 0px !important;
+   background-image:url(../img/exam.jpg) no-repeat ;
+   background-size:cover;
+   background-position: center !important;
+   height: 100% !important;
+   width: 100% !important;
+   background-attachment: fixed;
+ 
+   
+}
+
+h1{
+    margin-top: 150px;
+    font-weight: bolder; 
+    color: black; text-shadow: 
+    2px 2px 5px #4189C7;
+}
+
+.btn{
+    border-radius: 25px !important;
+}

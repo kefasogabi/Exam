@@ -1,6 +1,12 @@
 <div class="login-box">
         <div class="login-logo">
-          <a href="../../index2.html"><b>Admin</b>LTE</a>
+          <a [routerLink]='["/login"]'>
+             <div class="text-center">
+            <img class="rounded"
+                 src="/images/nsuk.png"
+                 alt="login-logo">
+          </div>
+          </a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -14,7 +20,7 @@
                     <input type="text" class="form-control inp" name="loginid" [(ngModel)]="model.loginid" #loginid="ngModel" placeholder="Login ID" required />
                 <div class="input-group-append">
                   <div class="input-group-text">
-                    <span class="fas fa-user"></span>
+                    <span class="fas fa-key"></span>
                   </div>
                 </div>
               </div>
@@ -47,7 +53,7 @@
               <a href="#">I forgot my password</a>
             </p> -->
             <p class="mb-0">
-              <a [routerLink]='["/register"]' class="text-center">Register a new membership</a>
+              <a [routerLink]='["/register"]' class="text-center">Register a new Account</a>
             </p>
           </div>
           <!-- /.login-card-body -->

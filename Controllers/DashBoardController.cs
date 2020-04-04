@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Exam.Controllers
 {
-     [Authorize]
+     
     public class DashBoardController : Controller
     {
         private readonly IDashBoardService dashBoardService;

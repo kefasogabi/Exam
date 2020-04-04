@@ -37,6 +37,10 @@ delete(id){
   return this.http.post('/Account/ChangePassword', user);
 }
 
+getUserProfile(){
+  return this.http.get('/Account/Profile');
+}
+
 getSex(){
   return this.http.get('/api/sex');
 }

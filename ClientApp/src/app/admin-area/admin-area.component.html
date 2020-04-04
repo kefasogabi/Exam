@@ -1,8 +1,8 @@
 
-<div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="hold-transition sidebar-mini layout-fixed ">
 <div class="wrapper">
+  <div>
   <div >
-    <app-admin-nav></app-admin-nav>
     <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -17,10 +17,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="" class="img-circle elevation-2" alt="User Image">
+          <img src="/images/avatar.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a [routerLink]='["/staff-profile"]' class="d-block"> </a>
+          <a [routerLink]='["/admin/profile"]' class="d-block"><b>{{user.firstName}} {{user.lastName}}</b></a>
         </div>
       </div>
 
@@ -38,75 +38,48 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                STAFFS
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li  class="nav-item">
+          
+              <li  [routerLinkActive]='["link-active"]'  class="nav-item">
                 <a [routerLink]='["/admin/register-staff"]' class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Staff</p>
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>ADD USER</p>
                 </a>
               </li>
-              <li  class="nav-item">
+
+              <li  [routerLinkActive]='["link-active"]' class="nav-item">
                 <a [routerLink]='["/admin/users"]' class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage staffs</p>
+                  <i class="fas fa-user nav-icon"></i>
+                  <p>MANAGE USERS</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                ADMINS
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li  class="nav-item">
+            
+              <li  [routerLinkActive]='["link-active"]'  class="nav-item">
                 <a [routerLink]='["/admin/register"]' class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Admin</p>
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>ADD ADMIN</p>
                 </a>
               </li>
-              <li  class="nav-item">
+              <li  [routerLinkActive]='["link-active"]'  class="nav-item">
                 <a [routerLink]='["/admin/admins"]' class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Admins</p>
+                  <i class=" fas fa-user nav-icon"></i>
+                  <p>MANAGE ADMINS</p>
                 </a>
               </li>
-            </ul>
-          </li>
-                <li class="nav-item has-treeview ">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-question-circle"></i>
-                    <p>
-                      QUESTIONS
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
+        
+
                     <li [routerLinkActive]='["link-active"]' class="nav-item">
                       <a [routerLink]='["/question"]' class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Manage Questions</p>
+                        <i class="fas fa-question-circle nav-icon"></i>
+                        <p>MANAGE QUESTIONS</p>
                       </a>
                     </li>
                     <li [routerLinkActive]='["link-active"]' class="nav-item">
                       <a [routerLink]='["/addquestion"]' class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Add Question</p>
+                        <i class="fas fa-plus nav-icon"></i>
+                        <p>ADD QUESTION</p>
                       </a>
                     </li>
-                  </ul>
-                </li>
+                  
                 <li  [routerLinkActive]='["link-active"]' class="nav-item">
                   <a [routerLink]='["/admin/change-password"]' class="nav-link">
                     <i class="nav-icon fa fa-lock"></i>
@@ -123,7 +96,7 @@
   </aside>
   </div>
   <div>
-      
+    <app-admin-nav></app-admin-nav>
       <div class="content-wrapper">
           <!-- Content Header (Page header) -->
         <section class="content">
@@ -139,8 +112,7 @@
     </section>
   <!-- /.content -->
   </div>
-  <!-- <app-staff-footer></app-staff-footer> -->
-
+  </div>
   </div>
 </div>
 </div>

@@ -22,8 +22,8 @@ export class QuizComponent implements OnInit {
       if(this.quizService.qnProgress == 10)
       
       this.router.navigate(['/result']);
-      // else
-      // this.startTimer();
+      else
+      this.startTimer();
     }
     else{
 
@@ -31,11 +31,8 @@ export class QuizComponent implements OnInit {
     this.quizService.qnProgress = 0;
     this.quizService.getQuestions().subscribe(
       (data: any) => {
-      //  this.checkuser();
         this.quizService.qns = data;
-        // this.checkuser();
         this.startTimer();
-        
       }
     );
 
