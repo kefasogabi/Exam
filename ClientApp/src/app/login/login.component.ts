@@ -42,24 +42,14 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('token', JSON.stringify(data.token));
                 let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
                 this.router.navigate([returnUrl || 'staff/exam']);
-                  // this.checkuser();
-                 
+               
               },
               error => {
                 this.invalidLogin = true;
               });
   }
 
-  
-  // checkuser(){
-  //   let currentUser = JSON.parse(localStorage.getItem('token'));
-  //   if(currentUser.score == null)
-  //   this.router.navigate(['/quiz']);
-  //     else
-     
-  //     this.router.navigate(['/profile']);
-  // }
-    
+
 }
 
 

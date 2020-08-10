@@ -77,6 +77,21 @@ namespace Exam.Controllers
             return Ok(new { token = tokenString });
         }
 
+        [AllowAnonymous]
+        [HttpPost("/api/send")]
+        public async Task<IActionResult> SendMail([FromForm]MailRequest request)
+        {
+            try
+            {
+                await emailsender.SendEmailAsync(request);
+                return Ok("Mail Sent");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+                
+        }
 
          [AllowAnonymous]
         [HttpPost("/api/Register")]
@@ -94,7 +109,7 @@ namespace Exam.Controllers
             catch(AppException ex)
             {
                 // return error message if there was an exception
-                return BadRequest(ex.Message);
+               throw ex;
             }
         }
 

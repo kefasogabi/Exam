@@ -11,11 +11,12 @@ export class StaffGuard implements CanActivate {
   constructor(private route: Router, private auth: AuthService){}
 
   canActivate(
-    next: ActivatedRouteSnapshot,
+    route, 
     state: RouterStateSnapshot): boolean {
       
-      if(this.auth.isAuthenticated())
-    return true;
+      if(this.auth.isAuthenticated()) return true;
+
+
       this.route.navigate(['/login'], {queryParams: {returnUrl: state.url}});
       return false;
   }

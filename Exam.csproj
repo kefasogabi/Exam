@@ -10,6 +10,8 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>e3cc5be7-2696-4d3f-ad89-8294343d2730</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlserver" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
   </ItemGroup>
 
   <ItemGroup>

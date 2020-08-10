@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
     },
     error => {
       this.invalidCredentials = true;
-      this.toastr.success('Password Succesfully changed', 'Success');
+      this.toastr.error(error._body, 'Error');
     });
   }
 

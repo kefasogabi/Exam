@@ -61,18 +61,6 @@ Answer(Id, choice){
 
 } 
 
-// checkuser(){
-//   let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-//   let id = currentUser.id
-  
 
-//   this.userService.getById(id).take(1).subscribe( data => this.person = data);
-
-//   if(currentUser.score != null)
-//     this.router.navigate(['/profile']);
-//     else
-//     this.router.navigate(['/quiz']);
-    
-// }
 
 }

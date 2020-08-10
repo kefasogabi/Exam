@@ -6,79 +6,54 @@ using Exam.Helper;
 using Microsoft.AspNetCore.Http;
 using Exam.Interface;
 using Microsoft.Extensions.Options;
+using Exam.Models;
+using System.IO;
 
 namespace Exam.Services
 {
     
     public class EmailSender : IEmailSender
     {
-        private readonly EmailSettings _emailSettings;
-        private readonly IHttpContextAccessor httpContextAccessor;
-
-        public EmailSender(IOptions<EmailSettings> emailSettings, IHttpContextAccessor httpContextAccessor)
+       
+        private readonly EmailSettings _mailSettings;
+        public EmailSender(IOptions<EmailSettings> mailSettings)
         {
-            this.httpContextAccessor = httpContextAccessor;
-            _emailSettings = emailSettings.Value;
-        }
-        public Task SendEmailAsync(string email, string activationcode)
-        {
-            try{
-                // Credentials
-            var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
-            
-             var VerifyUrl = "/User/VerifyAccount/" + activationcode;
-
-            var uriBuilder = new UriBuilder
-            {
-                Scheme = httpContextAccessor.HttpContext.Request.Scheme,
-                Host = httpContextAccessor.HttpContext.Request.Host.ToString(),
-                Path = $"/user/VerifyAccount/{activationcode}"
-            };
-
-            var link = uriBuilder.Uri.AbsoluteUri;
-
-            string subject = " Your account have been successfully created";
-            string body = "<br/><br/> we are excited to tell you that your account have been " +
-                "successfully created. please click on the link below to verify your account" +
-                "<br/><br/><a href='" + link+"'>"+link+"</a>";
-           
-           // Mail message
-            var mail = new MailMessage()
-            {
-                From = new MailAddress(_emailSettings.Sender, _emailSettings.SenderName),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            };
-
-            mail.To.Add(new MailAddress(email));
-
-            // Smtp client
-            var client = new SmtpClient()
-            {
-                Port = _emailSettings.MailPort,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Host = _emailSettings.MailServer,
-                EnableSsl = true,
-                Credentials = credentials
-            };
-
-            // Send it...         
-            client.Send(mail);
-
-            }
-            catch(Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-            
-            return Task.CompletedTask;
+            _mailSettings = mailSettings.Value;
         }
 
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        public async Task SendEmailAsync(MailRequest mailRequest)
         {
-            throw new NotImplementedException();
+            MailMessage message = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+            message.From = new MailAddress(_mailSettings.Mail, _mailSettings.DisplayName);
+            message.To.Add(new MailAddress(mailRequest.ToEmail));
+            message.Subject = mailRequest.Subject;
+            if (mailRequest.Attachments != null)
+            {
+                foreach (var file in mailRequest.Attachments)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            file.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            Attachment att = new Attachment(new MemoryStream(fileBytes), file.FileName);
+                            message.Attachments.Add(att);
+                        }
+                    }
+                }
+            }
+            message.IsBodyHtml = false;
+            message.Body = mailRequest.Body;
+            smtp.Port = _mailSettings.Port;
+            smtp.Host = _mailSettings.Host;
+            smtp.EnableSsl = false;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            await smtp.SendMailAsync(message);
+
         }
     }
 }

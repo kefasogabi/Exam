@@ -18,7 +18,7 @@
             <a class="nav-link" *ngIf="!auth.isAuthenticated()" [routerLink]='["/admin/login"]' (click)='collapse()'>
               <i class="nav-icon fa fa-sign-in-alt"></i> LOGIN
             </a>
-            <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin.role" [routerLink]='["/admin/login"]'  (click)='logout()'>
+            <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" [routerLink]='["/admin/login"]'  (click)='logout()'>
                 <i class="nav-icon fa fa-sign-out-alt"></i> LOGOUT
             </a>
         </li>

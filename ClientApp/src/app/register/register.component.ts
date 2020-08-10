@@ -42,11 +42,9 @@ export class  RegisterComponent implements OnInit  {
         this.userService.create(form.value).subscribe(
                 (data: any) => {
                     this.toastr.success('Registration Successfull', 'Success');
-                    if(this.auth.isAdmin.role){
-                      this.router.navigate(['/admin/dashboard'])
-                    }else{
+                    
                     this.router.navigate(['/login']);
-                  }
+                  
                     this.spinner.hide();
                 },
                 error => {

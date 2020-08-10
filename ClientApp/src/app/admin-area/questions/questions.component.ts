@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { QuizService } from '../../Services/quiz.service';
 import { Question } from '../../models/exam.model';
 import { DataTableDirective } from 'angular-datatables';

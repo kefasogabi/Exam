@@ -97,68 +97,66 @@ import { AdminProfileComponent } from './admin-area/admin-profile/admin-profile.
       { path: 'login', component: LoginComponent},
 
       /// Staff Routes
-      { path: 'staff/exam', component: StaffAreaComponent,
-        children: [{ path: '', component: QuizComponent }]
+      { path: 'staff/exam', component: StaffAreaComponent, canActivate:[StaffGuard],
+        children: [{ path: '', component: QuizComponent, canActivateChild:[StaffGuard] }]
       },
-      { path: 'staff/profile', component: StaffAreaComponent,
-        children: [{path: '', component: ProfileComponent}]
+      { path: 'staff/profile', component: StaffAreaComponent,canActivate:[StaffGuard],
+        children: [{path: '', component: ProfileComponent, canActivateChild:[StaffGuard]}]
       },
 
       /// Admin Routes
       
-      { path: 'result', component: StaffAreaComponent,
-        children: [{ path: '', component: ResultComponent}]
+      { path: 'result', component: StaffAreaComponent,canActivate:[StaffGuard],
+        children: [{ path: '', component: ResultComponent, canActivateChild:[StaffGuard]}]
       },
-      { path: 'addquestion', component: AdminAreaComponent,
-        children: [{ path: '', component: AddQuestionComponent}]
+      { path: 'addquestion', component: AdminAreaComponent,canActivate:[AdminGuard],
+        children: [{ path: '', component: AddQuestionComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'question', component: AdminAreaComponent, 
-        children:  [{ path: '', component: QuestionsComponent}]
+      { path: 'question', component: AdminAreaComponent, canActivate:[StaffGuard],
+        children:  [{ path: '', component: QuestionsComponent, canActivateChild:[StaffGuard]}]
       },
-      { path: 'Editquestion/:id', component: AdminAreaComponent, 
-        children: [{ path: '', component: AddQuestionComponent}]
+      { path: 'Editquestion/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: AddQuestionComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/dashboard', component: AdminAreaComponent, 
-        children: [{ path: '', component: DashboardComponent}]
+      { path: 'admin/dashboard', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: DashboardComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'ViewQuestion/:id', component: AdminAreaComponent,
-        children: [{ path: '', component: ViewQuestionComponent}]
+      { path: 'ViewQuestion/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: ViewQuestionComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'ViewUser/:id', component: AdminAreaComponent,
-        children: [{ path: '', component: ViewUserComponent }]
+      { path: 'ViewUser/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: ViewUserComponent, canActivateChild:[StaffGuard] }]
       },
-      { path: 'EditUser/:id', component: AdminAreaComponent,
-        children: [{ path: '', component: EdituserComponent}]
+      { path: 'EditUser/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: EdituserComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/dashboard', component: AdminAreaComponent,
-        children: [{ path: '', component: DashboardComponent}]
+      
+      { path: 'admin/register', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: AddAdminComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/register', component: AdminAreaComponent,
-        children: [{ path: '', component: AddAdminComponent}]
+      { path: 'admin/users', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: UsersComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/users', component: AdminAreaComponent,
-        children: [{ path: '', component: UsersComponent}]
+      { path: 'admin/edit/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: EditAdminComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/edit/:id', component: AdminAreaComponent,
-        children: [{ path: '', component: EditAdminComponent}]
+      { path: 'admin/view/:id', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: ViewAdminComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/view/:id', component: AdminAreaComponent,
-        children: [{ path: '', component: ViewAdminComponent}]
+      { path: 'admin/admins', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: AdminsComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/admins', component: AdminAreaComponent,
-        children: [{ path: '', component: AdminsComponent}]
-      },
-      { path: 'admin/change-password', component: AdminAreaComponent,
-        children: [{ path: '', component: ChangePasswordComponent}]
+      { path: 'admin/change-password', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: ChangePasswordComponent, canActivateChild:[AdminGuard]}]
       },
       { path: 'admin/register-staff', component: AdminAreaComponent,
         children: [{ path: '', component: RegisterComponent}]
       },
-      { path: 'admin/search-staff', component: AdminAreaComponent,
-        children: [{ path: '', component: SearchComponent}]
+      { path: 'admin/search-staff', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: SearchComponent, canActivateChild:[AdminGuard]}]
       },
-      { path: 'admin/profile', component: AdminAreaComponent,
-        children: [{ path: '', component: AdminProfileComponent}]
+      { path: 'admin/profile', component: AdminAreaComponent, canActivate:[AdminGuard],
+        children: [{ path: '', component: AdminProfileComponent, canActivateChild:[AdminGuard]}]
       },
 
     ])

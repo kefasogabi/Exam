@@ -11,13 +11,14 @@ export class AdminGuard implements CanActivate {
   constructor(private route: Router, private auth: AuthService){}
 
   canActivate(
-    next: ActivatedRouteSnapshot,
+    route,
     state: RouterStateSnapshot): boolean {
       
        
-      if(this.auth.isAuthenticated())
-    return true;
-      this.route.navigate(['/admin-login'], {queryParams: {returnUrl: state.url}});
+      if(this.auth.isAuthenticated() && this.auth.isAdmin()) return true;
+
+
+      this.route.navigate(['/admin/login'], {queryParams: {returnUrl: state.url}});
       return false;
   }
 

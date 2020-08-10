@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using Exam.Models;
 
 namespace Exam.Interface
 {
     public interface IEmailSender
     {
-          Task SendEmailAsync(string email, string activationcode);
+          Task SendEmailAsync(MailRequest mailRequest);
     }
 }

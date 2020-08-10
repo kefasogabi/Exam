@@ -68,7 +68,7 @@ namespace Exam
             
             // configure email sender settings
             services.AddOptions();
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.Configure<EmailSettings>(Configuration.GetSection("MailSettings"));
 
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();

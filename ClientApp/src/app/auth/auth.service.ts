@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthService {
  
+  role:any;
+  
   public getToken(): string {
     return JSON.parse(localStorage.getItem('token'));
   }
@@ -17,12 +19,7 @@ export class AuthService {
     return tokenNotExpired(null, token);
   }
 
-  get isAdmin(){
-   let  token = this.getToken();
-   if(!token) return null;
-
-   return new JwtHelper().decodeToken(token);
-  }
+  
 
   logout() {
     // remove user from local storage to log user out
@@ -30,14 +27,14 @@ export class AuthService {
     localStorage.removeItem('role');
 }
 
-  // isAdmin(){
-  //   let role = JSON.parse(localStorage.getItem('role'));
+  public isAdmin(): boolean {
+    let role = JSON.parse(localStorage.getItem('role'));
 
-  //   if(role == "Admin") 
-  //   return true;
+    if(role == "Admin") 
+    return true;
 
-  //   return false;
-  // }
+    return false;
+  }
 
   
 
